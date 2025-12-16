@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CADBridgeAI – STL to STEP Prototype</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #222;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .screen {
+      display: none;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      margin-top: 40px;
+      border-radius: 6px;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .placeholder {
+      border: 2px dashed #ccc;
+      padding: 30px;
+      text-align: center;
+      margin: 20px 0;
+      color: #777;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #007bff;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>CADBridgeAI – STL to STEP Assistant</h1>
+</header>
+
+<!-- Screen 1: Upload STL -->
+<div class="screen active" id="upload">
+  <h2>Upload STL</h2>
+  <p><strong>User input:</strong> STL mesh file</p>
+
+  <div class="placeholder">
+    STL File Upload (placeholder)
+  </div>
+
+  <p>Unit:
+    <select>
+      <option>mm</option>
+      <option>inch</option>
+    </select>
+  </p>
+
+  <button onclick="goTo('preview')">Start Analysis</button>
+</div>
+
+<!-- Screen 2: Geometry Preview -->
+<div class="screen" id="preview">
+  <h2>Geometry Preview</h2>
+  <p><strong>System output:</strong> Mesh preprocessing results</p>
+
+  <div class="placeholder">
+    3D Geometry Preview (placeholder)
+  </div>
+
+  <ul>
+    <li>Triangles: 256,000</li>
+    <li>Detected errors: 2 flipped normals</li>
+  </ul>
+
+  <button onclick="goTo('analysis')">Run AI Analysis</button>
+</div>
+
+<!-- Screen 3: AI Analysis -->
+<div class="screen" id="analysis">
+  <h2>AI Geometry Analysis</h2>
+  <p><strong>System output:</strong> Detected geometric primitives</p>
+
+  <ul>
+    <li>Plane – 92% confidence</li>
+    <li>Cylinder – 87% confidence</li>
+    <li>Freeform surface – 76% confidence</li>
+  </ul>
+
+  <button onclick="goTo('mapping')">Open Mapping Editor</button>
+</div>
+
+<!-- Screen 4: Mapping Editor -->
+<div class="screen" id="mapping">
+  <h2>Mapping Editor</h2>
+  <p><strong>Human-in-the-loop interaction</strong></p>
+
+  <ul>
+    <li>Region 1 → Plane</li>
+    <li>Region 2 → Cylinder</li>
+    <li>Region 3 → Freeform</li>
+  </ul>
+
+  <p class="note">
+    User can adjust mappings before conversion.
+  </p>
+
+  <button onclick="goTo('export')">Confirm Mapping</button>
+</div>
+
+<!-- Screen 5: Export -->
+<div class="screen" id="export">
+  <h2>Export and Download</h2>
+  <p><strong>Final output:</strong> CAD artifacts</p>
+
+  <ul>
+    <li>STEP file (B-Rep geometry)</li>
+    <li>Mapping JSON</li>
+    <li>Validation report</li>
+  </ul>
+
+  <button>Download STEP</button>
+  <button style="background:#28a745;">Download Report</button>
+</div>
+
+<script>
+  function goTo(screenId) {
+    document.querySelectorAll('.screen').forEach(s => {
+      s.classList.remove('active');
+    });
+    document.getElementById(screenId).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
