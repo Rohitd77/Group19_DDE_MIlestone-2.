@@ -1,2 +1,2 @@
-# Group19_DDE_MIlestone-2.
+# AI-driven Format Converter (CADBridgeAI).
 Prototype for Milestone 
